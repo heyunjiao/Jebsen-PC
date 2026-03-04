@@ -27,20 +27,20 @@ function vModel(self, dataObject, defaultValue) {
 
 const componentChild = {
   "el-button": {
-    default(h, conf, key) {
-      return conf[key];
+    default(h, conf) {
+      return conf.default;
     }
   },
   "el-input": {
-    prepend(h, conf, key) {
-      return <template slot="prepend">{conf[key]}</template>;
+    prepend(h, conf) {
+      return <template slot="prepend">{conf.prepend}</template>;
     },
-    append(h, conf, key) {
-      return <template slot="append">{conf[key]}</template>;
+    append(h, conf) {
+      return <template slot="append">{conf.append}</template>;
     }
   },
   "el-select": {
-    options(h, conf, key) {
+    options(h, conf) {
       const list = [];
       conf.options.forEach(item => {
         list.push(<el-option label={item.label} value={item.value} disabled={item.disabled}></el-option>);
@@ -49,7 +49,7 @@ const componentChild = {
     }
   },
   "el-radio-group": {
-    options(h, conf, key) {
+    options(h, conf) {
       const list = [];
       conf.options.forEach(item => {
         if (conf.optionType === "button") list.push(<el-radio-button value={item.value}>{item.label}</el-radio-button>);
@@ -64,7 +64,7 @@ const componentChild = {
     }
   },
   "el-checkbox-group": {
-    options(h, conf, key) {
+    options(h, conf) {
       const list = [];
       conf.options.forEach(item => {
         if (conf.optionType === "button") {
@@ -81,7 +81,7 @@ const componentChild = {
     }
   },
   "el-upload": {
-    "list-type": (h, conf, key) => {
+    "list-type": (h, conf) => {
       const list = [];
       if (conf["list-type"] === "picture-card") {
         list.push(<i class="el-icon-plus"></i>);
@@ -140,5 +140,11 @@ export default {
     });
     return h(this.conf.tag, dataObject, children);
   },
-  props: ["conf"]
+  props: {
+    conf: {
+      type: Object,
+      required: true
+    }
+  }
 };
+

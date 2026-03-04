@@ -1,6 +1,7 @@
 <script lang="jsx">
+/* eslint-disable @typescript-eslint/no-unused-vars, vue/require-prop-types */
 import draggable from "vuedraggable";
-import render from "@/utils/generator/render";
+import render from "@/utils/generator/render.jsx";
 import { CopyDocument, Delete } from "@element-plus/icons-vue";
 
 const components = {

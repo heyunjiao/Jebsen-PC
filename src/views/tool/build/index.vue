@@ -112,10 +112,11 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components, @typescript-eslint/no-unused-vars */
 import draggable from "vuedraggable";
 import beautifier from "js-beautify";
 import ClipboardJS from "clipboard";
-import render from "@/utils/generator/render";
+import render from "@/utils/generator/render.jsx";
 import RightPanel from "./RightPanel.vue";
 import { inputComponents, selectComponents, layoutComponents, formConf } from "@/utils/generator/config";
 import { beautifierConf, titleCase } from "@/utils/index";

@@ -43,10 +43,14 @@ function createComponentWrapper(component, route) {
   const wrapperName = route.fullPath;
   let wrapper = wrapperMap.get(wrapperName);
   if (!wrapper) {
-    wrapper = { name: wrapperName, render: () => h(component) };
+    wrapper = {
+      name: wrapperName,
+      render: () => h(component)
+    };
     wrapperMap.set(wrapperName, wrapper);
   }
-  return h(wrapper);
+  // 返回组件配置对象，由 <component :is="..."> 负责渲染
+  return wrapper;
 }
 
 // 监听当前页面是否最大化，动态添加 class

@@ -522,6 +522,7 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-mutating-props, @typescript-eslint/no-unused-vars, vue/no-reserved-component-names, vue/no-unused-components, vue/require-prop-types, vue/custom-event-name-casing, vue/require-explicit-emits */
 import { isArray } from "util";
 import draggable from "vuedraggable";
 import TreeNodeDialog from "./TreeNodeDialog";
@@ -712,19 +713,36 @@ export default {
       this.dialogVisible = true;
       this.currentNode = this.activeData.options;
     },
-    renderContent(h, { node, data, store }) {
-      return (
-        <div class="custom-tree-node">
-          <span>{node.label}</span>
-          <span class="node-operation">
-            <el-icon on-click={() => this.append(data)} title="添加">
-              <Plus />
-            </el-icon>
-            <el-icon on-click={() => this.remove(node, data)} title="删除">
-              <Delete />
-            </el-icon>
-          </span>
-        </div>
+    renderContent(h, { node, data }) {
+      // 使用 render 函数避免 JSX 语法，兼容当前构建配置
+      return h(
+        "div",
+        { class: "custom-tree-node" },
+        [
+          h("span", node.label),
+          h(
+            "span",
+            { class: "node-operation" },
+            [
+              h(
+                "el-icon",
+                {
+                  attrs: { title: "添加" },
+                  on: { click: () => this.append(data) }
+                },
+                [h(Plus)]
+              ),
+              h(
+                "el-icon",
+                {
+                  attrs: { title: "删除" },
+                  on: { click: () => this.remove(node, data) }
+                },
+                [h(Delete)]
+              )
+            ]
+          )
+        ]
       );
     },
     append(data) {

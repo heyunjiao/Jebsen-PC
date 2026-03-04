@@ -2,7 +2,7 @@
   <div class="table-box">
     <ProTable
       ref="proTable"
-      title="门店经营分析"
+      :title="t('operation.storeAnalysis')"
       :columns="columns"
       :request-api="getTableList"
       :pagination="true"
